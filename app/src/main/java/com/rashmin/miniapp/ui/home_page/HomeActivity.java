@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.rashmin.miniapp.R;
-import com.rashmin.miniapp.ui.action_bar.Action_BarActivity;
+import com.rashmin.miniapp.ui.product_list_action_bar.Action_Bar_ProductActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(HomeActivity.this, Action_BarActivity.class);
+                Intent intent = new Intent(HomeActivity.this, Action_Bar_ProductActivity.class);
                 startActivity(intent);
                 finish();
             }
