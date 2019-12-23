@@ -58,9 +58,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
         return products;
     }
 
-
-
-
     public void update(Product product){
         int id=product.getId();
         String name = product.getName();

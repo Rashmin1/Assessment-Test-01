@@ -22,7 +22,7 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
 
 
 
-    private RecyclerView recyclerView;
+    private RecyclerView recycler_view;
     private Button product_add;
     private EditText product_id;
     private EditText product_name;
@@ -31,7 +31,6 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
     private EditText product_price;
 
 
-    private final String TAG = "firstactivity";
     List<Product> products;
     private SqliteHelper dbHelper;
     private int toUpdate=0;
@@ -43,6 +42,7 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_action__bar_product);
 
+        recycler_view = findViewById(R.id.recyclerView);
         product_add = findViewById(R.id.buttonAdd);
         product_id = findViewById(R.id.editId);
         product_name = findViewById(R.id.editName);
@@ -58,22 +58,20 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
         setTitle("List of Product");
 
         productAdapter = new ProductAdapter(Action_Bar_ProductActivity.this, products);
-        recyclerView.setAdapter(productAdapter);
+        recycler_view.setAdapter(productAdapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(Action_Bar_ProductActivity.this));
+        recycler_view.setLayoutManager(new LinearLayoutManager(Action_Bar_ProductActivity.this));
 
         product_add.setOnClickListener(this);
         productAdapter.setListener(this);
 
         dbHelper=new SqliteHelper(this);
         showList();
-
     }
 
     @Override
     public void onClick(View view) {
 
-        String id = product_id.getText().toString().trim();
         String name = product_name.getText().toString().trim();
         String category = product_category.getText().toString().trim();
         String description = product_description.getText().toString().trim();
@@ -91,7 +89,7 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
         }
         showList();
         clearAll();
-        Toast.makeText(Action_Bar_ProductActivity.this,"Data Saved!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Action_Bar_ProductActivity.this,"Data Saved", Toast.LENGTH_SHORT).show();
 
     }
     public void showList(){
@@ -102,6 +100,7 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
     public void clearAll()
     {
 
+        product_id.setText("");
         product_name.setText("");
         product_category.setText("");
         product_description.setText("");
@@ -112,6 +111,7 @@ public class Action_Bar_ProductActivity extends AppCompatActivity implements Vie
     @Override
     public void onItemClick(Product item, int position) {
 
+        product_id.setText(item.getName());
         product_name.setText(""+item.getName());
         product_category.setText(""+item.getCategory());
         product_description.setText(""+item.getDescription());
